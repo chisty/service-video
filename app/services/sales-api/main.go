@@ -35,8 +35,6 @@ func main() {
 		log.Error(ctx, "startup", "msg", err)
 		return
 	}
-
-	return
 }
 
 func run(ctx context.Context, log *logger.Logger) error {
