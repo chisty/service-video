@@ -6,6 +6,10 @@ SHELL = $(if $(wildcard $(SHELL_PATH)),/bin/ash,/bin/bash)
 run:
 	go run app/services/sales-api/main.go | go run app/tooling/logfmt/main.go
 
+run-help:
+	go run app/services/sales-api/main.go --help | go run app/tooling/logfmt/main.go
+
+
 
 # Define dependencies
 
@@ -18,7 +22,7 @@ GRAFANA         := grafana/grafana:10.1.0
 PROMETHEUS      := prom/prometheus:v2.47.0
 TEMPO           := grafana/tempo:2.2.0
 LOKI            := grafana/loki:2.9.0
-PROMTAIL        := grafana/promtail:2.9.0
+PROMTAIL        := grafana/promtail:2.9.0 
 
 KIND_CLUSTER    := ardan-starter-cluster
 NAMESPACE       := sales-system
@@ -47,7 +51,6 @@ service:
 
 # ==============================================================================
 # Running from within k8s/kind
-
 
 dev-up:
 	kind create cluster \
@@ -91,3 +94,10 @@ dev-status:
 
 dev-describe-sales:
 	kubectl describe pod --namespace=$(NAMESPACE) -l app=$(APP)
+
+# ==============================================================================
+# Modules support
+
+tidy:
+	go mod tidy
+	go mod vendor
