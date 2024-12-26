@@ -47,6 +47,7 @@ func main() {
 }
 
 func run(ctx context.Context, log *logger.Logger) error {
+
 	// -------------------------------------------------------------------------
 	// GOMAXPROCS
 
